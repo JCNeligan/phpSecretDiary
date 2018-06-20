@@ -29,11 +29,11 @@ if (array_key_exists("submit-signup", $_POST)) {
 
             if (!mysqli_query($link, $query)) {
                 $error = "<p>Could not complete signup at this time, please try again later</p>";
-                echo mysqli_error($link);
-                die();
             } else {
+                $query = "UPDATE `users` SET password = '" . md5(md5(mysqli_insert_id($link)) . $_POST['password-signup']) . "' WHERE id = " . mysqli_insert_id($link) . " LIMIT 1";
+                mysqli_query($link, $query);
                 echo "Sign Up Complete!";
-                // Next: Hash password
+
             }
 
         }
