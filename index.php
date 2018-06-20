@@ -1,9 +1,43 @@
 <?php
 
 if (array_key_exists("submit-signup", $_POST)) {
-    print_r($_POST);
-} else {
-    echo "Nope!";
+
+    $link = mysqli_connect("localhost", "root", "", "secret_diary");
+    if (mysqli_connect_error()) {
+        die("Error connecting to database");
+    }
+
+    $error = "";
+
+    if (!$_POST["email-signup"]) {
+        $error = "Email address is required<br>";
+    }
+
+    if (!$_POST["password-signup"]) {
+        $error = "Password is required<br>";
+    }
+
+    if ($error != "") {
+        $error = "<p>There were error(s) in your form:</p>" . $error;
+    } else {
+        $query = "SELECT `id` FROM `users` WHERE `email` = '" . mysqli_real_escape_string($link, $_POST['email-signup']) . "' LIMIT 1";
+        $result = mysqli_query($link, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $error = "<p>That email address has already been taken.</p>";
+        } else {
+            $query = "INSERT INTO `users` (`email`, `password`) VALUES ('" . mysqli_real_escape_string($link, $_POST['email-signup']) . "', '" . mysqli_real_escape_string($link, $_POST['password-signup']) . "')";
+
+            if (!mysqli_query($link, $query)) {
+                $error = "<p>Could not complete signup at this time, please try again later</p>";
+                echo mysqli_error($link);
+                die();
+            } else {
+                echo "Sign Up Complete!";
+                // Next: Hash password
+            }
+
+        }
+    }
 }
 
 ?>
@@ -15,6 +49,9 @@ if (array_key_exists("submit-signup", $_POST)) {
   </head>
 
   <body>
+
+  <div id="error"><?php echo $error; ?></div>
+
     <form method="post">
       <input type="email" name="email-signup" placeholder="Your Email"/>
       <input type="password" name="password-signup" placeholder="Your Password"/>
