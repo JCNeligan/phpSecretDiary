@@ -1,13 +1,23 @@
 <?php
 
+session_start();
+
+$error = "";
+
+if (array_key_exists("logout", $_GET)) {
+    unset($_SESSION);
+    setcookie("id", "", time() - 60 * 60);
+    $_COOKIE["id"] = "";
+} else if (array_key_exists("id", $_SESSION) or array_key_exists("id", $_COOKIE)) {
+    header("Location: loggedinpage.php");
+}
+
 if (array_key_exists("submit-signup", $_POST)) {
 
     $link = mysqli_connect("localhost", "root", "", "secret_diary");
     if (mysqli_connect_error()) {
         die("Error connecting to database");
     }
-
-    $error = "";
 
     if (!$_POST["email-signup"]) {
         $error = "Email address is required<br>";
@@ -32,7 +42,11 @@ if (array_key_exists("submit-signup", $_POST)) {
             } else {
                 $query = "UPDATE `users` SET password = '" . md5(md5(mysqli_insert_id($link)) . $_POST['password-signup']) . "' WHERE id = " . mysqli_insert_id($link) . " LIMIT 1";
                 mysqli_query($link, $query);
-                echo "Sign Up Complete!";
+                $_SESSION["id"] = mysqli_insert_id($link);
+                if ($_POST["persist-signup" == 1]) {
+                    setcookie("id", mysqli_insert_id($link), time() + 60 * 60 * 48);
+                }
+                header("Location: loggedinpage.php");
 
             }
 
