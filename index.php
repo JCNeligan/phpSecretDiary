@@ -53,7 +53,26 @@ if (array_key_exists("submit", $_POST)) {
 
             }
         } else {
-            print_r($_POST);
+            $query = "SELECT * FROM `users` WHERE email = '" . mysqli_real_escape_string($link, $_POST['email']) . "'";
+            $result = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($result);
+
+            if (isset($row)) {
+                $hashedPassword = md5(md5($row['id']) . $_POST['password']);
+
+                if ($hashedPassword == $row['password']) {
+                    $_SESSION['id'] = $row['id'];
+
+                    if ($_POST["persist" == 1]) {
+                        setcookie("id", $row['id'], time() + 60 * 60 * 48);
+                    }
+                    header("Location: loggedinpage.php");
+                } else {
+                    $error = "Cannot login! Incorrect password.";
+                }
+            } else {
+                $error = "That email/password combination could not be found.";
+            }
         }
     }
 }
