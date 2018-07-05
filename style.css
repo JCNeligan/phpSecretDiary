@@ -6,7 +6,35 @@ body {
     background-size: cover;
 }
 
+body,
+label {
+    color: #14181B;
+}
+
 .container {
     text-align: center;
     max-width: 400px;
+    margin-top: 165px;
+}
+
+form>p {
+    color: white;
+}
+
+form {
+    margin-top: 90px;
+}
+
+#logIn {
+    display: none;
+}
+
+.btn {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.toggleForms {
+    font-weight: bold;
+    color: #00a7be;
 }

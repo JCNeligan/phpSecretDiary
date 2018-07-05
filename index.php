@@ -14,10 +14,7 @@ if (array_key_exists("logout", $_GET)) {
 
 if (array_key_exists("submit", $_POST)) {
 
-    $link = mysqli_connect("localhost", "root", "", "secret_diary");
-    if (mysqli_connect_error()) {
-        die("Error connecting to database");
-    }
+    include "connection.php";
 
     if (!$_POST["email"]) {
         $error = "Email address is required<br>";
@@ -79,22 +76,15 @@ if (array_key_exists("submit", $_POST)) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css" crossorigin="anonymous">
-        <title>Secret Diary</title>
-    </head>
-
+<?php include "header.php";?>
     <body>
         <div class="container">
             <h1>Secret Diary</h1>
+            <p><strong>Store your diary permanently and securely.</strong></p>
             <div id="error"><?php echo $error; ?></div>
 
-            <form method="post">
+            <form method="post" id="signUp">
+                <p>Sign up now!</p>
                 <div class="form-group">
                     <input class="form-control" type="email" name="email" placeholder="Your Email"/>
                 </div>
@@ -109,8 +99,10 @@ if (array_key_exists("submit", $_POST)) {
                     <input type="hidden" name="signUp" value="1"/>
                     <input class="btn btn-success" type="submit" name="submit" value="Sign Up!"/>
                 </div>
+                <p><a href="#" id="showLogIn" class="toggleForms">Log In</a></p>
             </form>
-            <form method="post">
+            <form method="post" id="logIn">
+                <p>Log in with your username and password.</p>
                 <div class="form-group">
                     <input class="form-control" type="text" name="email" placeholder="Your Email"/>
                 </div>
@@ -125,11 +117,8 @@ if (array_key_exists("submit", $_POST)) {
                     <input type="hidden" name="signUp" value="0"/>
                     <input class="btn btn-success" type="submit" name="submit" value="Log In!"/>
                 </div>
+                <p><a href="#" id="showLogIn" class="toggleForms">Sign Up</a></p>
             </form>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
-</html>
+     <?php include "footer.php";?>
