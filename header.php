@@ -7,3 +7,4 @@
         <link rel="stylesheet" href="style.css" crossorigin="anonymous">
         <title>Secret Diary</title>
     </head>
+    <body>

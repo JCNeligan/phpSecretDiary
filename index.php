@@ -77,48 +77,48 @@ if (array_key_exists("submit", $_POST)) {
 ?>
 
 <?php include "header.php";?>
-    <body>
-        <div class="container">
-            <h1>Secret Diary</h1>
-            <p><strong>Store your diary permanently and securely.</strong></p>
-            <div id="error"><?php echo $error; ?></div>
 
-            <form method="post" id="signUp">
-                <p>Sign up now!</p>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Your Email"/>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Your Password"/>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="persist" id="check1"/>
-                    <label class="form-check-label" for="check1">Stay logged in?</label>
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="signUp" value="1"/>
-                    <input class="btn btn-success" type="submit" name="submit" value="Sign Up!"/>
-                </div>
-                <p><a href="#" id="showLogIn" class="toggleForms">Log In</a></p>
-            </form>
-            <form method="post" id="logIn">
-                <p>Log in with your username and password.</p>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="email" placeholder="Your Email"/>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Your Password"/>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="persist" id="check2"/>
-                    <label class="form-check-label" for="check2">Stay logged in?</label>
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="signUp" value="0"/>
-                    <input class="btn btn-success" type="submit" name="submit" value="Log In!"/>
-                </div>
-                <p><a href="#" id="showLogIn" class="toggleForms">Sign Up</a></p>
-            </form>
+<div class="container" id="homePageContainer">
+    <h1>Secret Diary</h1>
+    <p><strong>Store your diary permanently and securely.</strong></p>
+    <div id="error"><?php echo $error; ?></div>
+
+    <form method="post" id="signUp">
+        <p>Sign up now!</p>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Your Email"/>
         </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Your Password"/>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="persist" id="check1"/>
+            <label class="form-check-label" for="check1">Stay logged in?</label>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="signUp" value="1"/>
+            <input class="btn btn-success" type="submit" name="submit" value="Sign Up!"/>
+        </div>
+        <p><a href="#" id="showLogIn" class="toggleForms">Log In</a></p>
+    </form>
+    <form method="post" id="logIn">
+        <p>Log in with your username and password.</p>
+        <div class="form-group">
+            <input class="form-control" type="text" name="email" placeholder="Your Email"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Your Password"/>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="persist" id="check2"/>
+            <label class="form-check-label" for="check2">Stay logged in?</label>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="signUp" value="0"/>
+            <input class="btn btn-success" type="submit" name="submit" value="Log In!"/>
+        </div>
+        <p><a href="#" id="showLogIn" class="toggleForms">Sign Up</a></p>
+    </form>
+</div>
 
-     <?php include "footer.php";?>
+<?php include "footer.php";?>
