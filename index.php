@@ -81,7 +81,7 @@ if (array_key_exists("submit", $_POST)) {
 <div class="container" id="homePageContainer">
     <h1>Secret Diary</h1>
     <p><strong>Store your diary permanently and securely.</strong></p>
-    <div id="error"><?php echo $error; ?></div>
+
 
     <form method="post" id="signUp">
         <p>Sign up now!</p>
@@ -119,6 +119,11 @@ if (array_key_exists("submit", $_POST)) {
         </div>
         <p><a href="#" id="showLogIn" class="toggleForms">Sign Up</a></p>
     </form>
+     <div id="error">
+<?php if ($error != "") {
+    echo '<div class="alert alert-danger" role="alert">' . $error . '</div>';
+}?>
+    </div>
 </div>
 
 <?php include "footer.php";?>
